@@ -19,7 +19,7 @@ class ExpectationResult:
     detail: str
 
 
-def run_expectations(cleaned_rows: List[Dict[str, Any]]) -> Tuple[List[ExpectationResult], bool]:
+def run_expectations(cleaned_rows: List[Dict[str, Any]], raw_count: int = 0) -> Tuple[List[ExpectationResult], bool]:
     """
     Trả về (results, should_halt).
 
@@ -109,6 +109,33 @@ def run_expectations(cleaned_rows: List[Dict[str, Any]]) -> Tuple[List[Expectati
             ok6,
             "halt",
             f"violations={len(bad_hr_annual)}",
+        )
+    )
+
+    # E7 (New): Tỉ lệ quarantine không vượt quá 60% (halt)
+    if raw_count > 0:
+        quarantine_ratio = (raw_count - len(cleaned_rows)) / raw_count
+        ok7 = quarantine_ratio <= 0.60
+        results.append(
+            ExpectationResult(
+                "max_quarantine_ratio_60",
+                ok7,
+                "halt",
+                f"quarantine_ratio={quarantine_ratio:.2f}",
+            )
+        )
+
+    # E8 (New): Kiểm tra phân phối doc_id (warn)
+    required_docs = {"policy_refund_v4", "sla_p1_2026", "it_helpdesk_faq", "hr_leave_policy"}
+    present_docs = {r.get("doc_id") for r in cleaned_rows if r.get("doc_id")}
+    missing_docs = required_docs - present_docs
+    ok8 = len(missing_docs) == 0
+    results.append(
+        ExpectationResult(
+            "doc_distribution_check",
+            ok8,
+            "warn",
+            f"missing_docs={sorted(list(missing_docs))}",
         )
     )
 

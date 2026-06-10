@@ -115,13 +115,33 @@ def clean_rows(
             quarantine.append({**raw, "reason": "missing_chunk_text"})
             continue
 
-        key = _norm_text(text)
+        # Rule 7 (New): Clean/Normalize whitespace
+        cleaned_text = " ".join(text.strip().split())
+
+        # Rule 8 (New): Quarantine draft placeholders
+        placeholders = ["TODO", "[insert]", "<insert>", "<placeholder>", "[draft]"]
+        if any(p.lower() in cleaned_text.lower() for p in placeholders):
+            quarantine.append({**raw, "reason": "placeholder_content"})
+            continue
+
+        # Rule 9 (New): Quarantine future effective dates (after 2028-12-31)
+        if eff_norm > "2028-12-31":
+            quarantine.append(
+                {
+                    **raw,
+                    "reason": "future_effective_date",
+                    "effective_date_normalized": eff_norm,
+                }
+            )
+            continue
+
+        key = _norm_text(cleaned_text)
         if key in seen_text:
             quarantine.append({**raw, "reason": "duplicate_chunk_text"})
             continue
         seen_text.add(key)
 
-        fixed_text = text
+        fixed_text = cleaned_text
         if apply_refund_window_fix and doc_id == "policy_refund_v4":
             if "14 ngày làm việc" in fixed_text:
                 fixed_text = fixed_text.replace(

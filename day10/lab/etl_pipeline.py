@@ -46,6 +46,63 @@ def _log(path: Path, line: str) -> None:
         f.write(line + "\n")
 
 
+def load_canonical_docs(root_dir: Path) -> list[dict[str, str]]:
+    contract_path = root_dir / "contracts" / "data_contract.yaml"
+    if not contract_path.is_file():
+        return []
+    try:
+        import yaml
+    except ImportError:
+        return []
+    with contract_path.open("r", encoding="utf-8") as f:
+        config = yaml.safe_load(f)
+    
+    canonical_sources = config.get("canonical_sources", [])
+    rows = []
+    
+    for src in canonical_sources:
+        path_str = src.get("path")
+        doc_id = src.get("doc_id")
+        file_path = root_dir / path_str
+        if not file_path.is_file():
+            continue
+            
+        content = file_path.read_text(encoding="utf-8")
+        lines = content.splitlines()
+        effective_date = "2026-02-01"
+        for line in lines:
+            if ":" in line:
+                k, v = line.split(":", 1)
+                if k.strip().lower() == "effective date":
+                    effective_date = v.strip()
+                    break
+        
+        sections = []
+        current_section = []
+        for line in lines:
+            if line.strip().startswith("===") and line.strip().endswith("==="):
+                if current_section:
+                    sections.append("\n".join(current_section).strip())
+                current_section = [line.strip()]
+            else:
+                if current_section or line.strip():
+                    current_section.append(line)
+        if current_section:
+            sections.append("\n".join(current_section).strip())
+            
+        for idx, sec in enumerate(sections, 1):
+            if not sec:
+                continue
+            rows.append({
+                "chunk_id": f"canonical_{doc_id}_{idx}",
+                "doc_id": doc_id,
+                "chunk_text": sec,
+                "effective_date": effective_date,
+                "exported_at": "2026-04-10T08:00:00"
+            })
+    return rows
+
+
 def cmd_run(args: argparse.Namespace) -> int:
     run_id = args.run_id or datetime.now(timezone.utc).strftime("%Y-%m-%dT%H-%MZ")
     raw_path = Path(args.raw)
@@ -62,9 +119,12 @@ def cmd_run(args: argparse.Namespace) -> int:
         _log(log_path, msg)
 
     rows = load_raw_csv(raw_path)
+    canonical_rows = load_canonical_docs(ROOT)
+    rows.extend(canonical_rows)
     raw_count = len(rows)
     log(f"run_id={run_id}")
     log(f"raw_records={raw_count}")
+    log(f"canonical_records_loaded={len(canonical_rows)}")
 
     cleaned, quarantine = clean_rows(
         rows,
@@ -80,7 +140,7 @@ def cmd_run(args: argparse.Namespace) -> int:
     log(f"cleaned_csv={cleaned_path.relative_to(ROOT)}")
     log(f"quarantine_csv={quar_path.relative_to(ROOT)}")
 
-    results, halt = run_expectations(cleaned)
+    results, halt = run_expectations(cleaned, raw_count=raw_count)
     for r in results:
         sym = "OK" if r.passed else "FAIL"
         log(f"expectation[{r.name}] {sym} ({r.severity}) :: {r.detail}")
@@ -88,7 +148,7 @@ def cmd_run(args: argparse.Namespace) -> int:
         log("PIPELINE_HALT: expectation suite failed (halt).")
         return 2
     if halt and args.skip_validate:
-        log("WARN: expectation failed but --skip-validate → tiếp tục embed (chỉ dùng cho demo Sprint 3).")
+        log("WARN: expectation failed but --skip-validate -> tiep tuc embed (chi dung cho demo Sprint 3).")
 
     # Embed
     embed_ok = cmd_embed_internal(

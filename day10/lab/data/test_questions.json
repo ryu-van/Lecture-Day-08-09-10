@@ -1,31 +1,352 @@
 [
   {
-    "id": "q_refund_window",
+    "id": "q1",
     "question": "Khách hàng có bao nhiêu ngày để yêu cầu hoàn tiền kể từ khi xác nhận đơn?",
     "must_contain_any": ["7 ngày", "7 ngày làm việc"],
     "must_not_contain": ["14 ngày làm việc"],
-    "note": "Nếu embed còn chunk stale 14 ngày → hits_forbidden=yes"
+    "expect_top1_doc_id": "policy_refund_v4"
   },
   {
-    "id": "q_p1_sla",
+    "id": "q2",
+    "question": "Thời hạn tối đa để gửi yêu cầu hoàn tiền là mấy ngày?",
+    "must_contain_any": ["7 ngày", "7 ngày làm việc"],
+    "must_not_contain": ["14 ngày làm việc"],
+    "expect_top1_doc_id": "policy_refund_v4"
+  },
+  {
+    "id": "q3",
+    "question": "Sau bao nhiêu ngày kể từ khi xác nhận đơn hàng thì hết hạn yêu cầu hoàn tiền?",
+    "must_contain_any": ["7 ngày", "7 ngày làm việc"],
+    "must_not_contain": ["14 ngày làm việc"],
+    "expect_top1_doc_id": "policy_refund_v4"
+  },
+  {
+    "id": "q4",
+    "question": "Quy định về thời hạn gửi yêu cầu refund là bao lâu?",
+    "must_contain_any": ["7 ngày", "7 ngày làm việc"],
+    "must_not_contain": ["14 ngày làm việc"],
+    "expect_top1_doc_id": "policy_refund_v4"
+  },
+  {
+    "id": "q5",
+    "question": "Đơn hàng được yêu cầu hoàn tiền trong khoảng thời gian bao lâu?",
+    "must_contain_any": ["7 ngày", "7 ngày làm việc"],
+    "must_not_contain": ["14 ngày làm việc"],
+    "expect_top1_doc_id": "policy_refund_v4"
+  },
+  {
+    "id": "q6",
+    "question": "Bao nhiêu ngày làm việc là giới hạn cho việc yêu cầu hoàn trả đơn hàng?",
+    "must_contain_any": ["7 ngày", "7 ngày làm việc"],
+    "must_not_contain": ["14 ngày làm việc"],
+    "expect_top1_doc_id": "policy_refund_v4"
+  },
+  {
+    "id": "q7",
+    "question": "Khách hàng cần liên hệ hoàn tiền trong vòng mấy ngày?",
+    "must_contain_any": ["7 ngày", "7 ngày làm việc"],
+    "must_not_contain": ["14 ngày làm việc"],
+    "expect_top1_doc_id": "policy_refund_v4"
+  },
+  {
+    "id": "q8",
+    "question": "Cửa sổ thời gian để được chấp nhận hoàn tiền là bao nhiêu ngày?",
+    "must_contain_any": ["7 ngày", "7 ngày làm việc"],
+    "must_not_contain": ["14 ngày làm việc"],
+    "expect_top1_doc_id": "policy_refund_v4"
+  },
+  {
+    "id": "q9",
+    "question": "Khách hàng được yêu cầu trả tiền trong vòng 7 ngày làm việc đúng không?",
+    "must_contain_any": ["7 ngày", "7 ngày làm việc"],
+    "must_not_contain": ["14 ngày làm việc"],
+    "expect_top1_doc_id": "policy_refund_v4"
+  },
+  {
+    "id": "q10",
+    "question": "Chính sách hoàn tiền quy định thời hạn gửi yêu cầu là bao lâu?",
+    "must_contain_any": ["7 ngày", "7 ngày làm việc"],
+    "must_not_contain": ["14 ngày làm việc"],
+    "expect_top1_doc_id": "policy_refund_v4"
+  },
+  {
+    "id": "q11",
+    "question": "Vui lòng cho biết thời hạn tối đa để gửi yêu cầu refund đơn hàng?",
+    "must_contain_any": ["7 ngày", "7 ngày làm việc"],
+    "must_not_contain": ["14 ngày làm việc"],
+    "expect_top1_doc_id": "policy_refund_v4"
+  },
+  {
+    "id": "q12",
+    "question": "Khách gửi yêu cầu hoàn tiền trong vòng 7 ngày làm việc kể từ lúc nào?",
+    "must_contain_any": ["7 ngày", "7 ngày làm việc"],
+    "must_not_contain": ["14 ngày làm việc"],
+    "expect_top1_doc_id": "policy_refund_v4"
+  },
+  {
+    "id": "q13",
+    "question": "Số ngày quy định để gửi yêu cầu hoàn trả tiền là bao nhiêu?",
+    "must_contain_any": ["7 ngày", "7 ngày làm việc"],
+    "must_not_contain": ["14 ngày làm việc"],
+    "expect_top1_doc_id": "policy_refund_v4"
+  },
+  {
+    "id": "q14",
+    "question": "Hạn chót để người dùng gửi yêu cầu refund là mấy ngày làm việc?",
+    "must_contain_any": ["7 ngày", "7 ngày làm việc"],
+    "must_not_contain": ["14 ngày làm việc"],
+    "expect_top1_doc_id": "policy_refund_v4"
+  },
+  {
+    "id": "q15",
+    "question": "Thời hạn hoàn trả tiền mua hàng là 7 ngày đúng không?",
+    "must_contain_any": ["7 ngày", "7 ngày làm việc"],
+    "must_not_contain": ["14 ngày làm việc"],
+    "expect_top1_doc_id": "policy_refund_v4"
+  },
+  {
+    "id": "q16",
+    "question": "Sau khi khách gửi yêu cầu hoàn tiền, CS Agent cần xác nhận trong vòng bao lâu?",
+    "must_contain_any": ["1 ngày", "1 ngày làm việc"],
+    "must_not_contain": [],
+    "expect_top1_doc_id": "policy_refund_v4"
+  },
+  {
+    "id": "q17",
+    "question": "CS Agent có bao lâu thời gian để xem xét và xác nhận yêu cầu hoàn tiền?",
+    "must_contain_any": ["1 ngày", "1 ngày làm việc"],
+    "must_not_contain": [],
+    "expect_top1_doc_id": "policy_refund_v4"
+  },
+  {
+    "id": "q18",
+    "question": "Thời gian CS Agent xác nhận điều kiện hoàn tiền là mấy ngày?",
+    "must_contain_any": ["1 ngày", "1 ngày làm việc"],
+    "must_not_contain": [],
+    "expect_top1_doc_id": "policy_refund_v4"
+  },
+  {
+    "id": "q19",
+    "question": "Trong vòng bao lâu thì CS Agent phải xác nhận yêu cầu refund của khách?",
+    "must_contain_any": ["1 ngày", "1 ngày làm việc"],
+    "must_not_contain": [],
+    "expect_top1_doc_id": "policy_refund_v4"
+  },
+  {
+    "id": "q20",
+    "question": "CS Agent cần xử lý bước xác nhận refund trong vòng mấy ngày làm việc?",
+    "must_contain_any": ["1 ngày", "1 ngày làm việc"],
+    "must_not_contain": [],
+    "expect_top1_doc_id": "policy_refund_v4"
+  },
+  {
+    "id": "q21",
+    "question": "Thời hạn để CS Agent hoàn thành bước 2 xem xét yêu cầu là bao lâu?",
+    "must_contain_any": ["1 ngày", "1 ngày làm việc"],
+    "must_not_contain": [],
+    "expect_top1_doc_id": "policy_refund_v4"
+  },
+  {
+    "id": "q22",
+    "question": "CS Agent phải phản hồi xác nhận đủ điều kiện hoàn tiền trong vòng 1 ngày làm việc đúng không?",
+    "must_contain_any": ["1 ngày", "1 ngày làm việc"],
+    "must_not_contain": [],
+    "expect_top1_doc_id": "policy_refund_v4"
+  },
+  {
+    "id": "q23",
+    "question": "Bước xem xét của CS Agent đối với yêu cầu hoàn tiền mất bao lâu?",
+    "must_contain_any": ["1 ngày", "1 ngày làm việc"],
+    "must_not_contain": [],
+    "expect_top1_doc_id": "policy_refund_v4"
+  },
+  {
+    "id": "q24",
+    "question": "Hạn định để nhân viên CS xác nhận yêu cầu của khách hàng gửi đến là bao lâu?",
+    "must_contain_any": ["1 ngày", "1 ngày làm việc"],
+    "must_not_contain": [],
+    "expect_top1_doc_id": "policy_refund_v4"
+  },
+  {
+    "id": "q25",
+    "question": "CS Agent cần bao nhiêu ngày làm việc để xác nhận thông tin refund?",
+    "must_contain_any": ["1 ngày", "1 ngày làm việc"],
+    "must_not_contain": [],
+    "expect_top1_doc_id": "policy_refund_v4"
+  },
+  {
+    "id": "q26",
     "question": "SLA phản hồi đầu tiên cho ticket P1 là bao lâu?",
     "must_contain_any": ["15 phút"],
     "must_not_contain": [],
-    "note": "Chunk từ sla_p1_2026"
+    "expect_top1_doc_id": "sla_p1_2026"
   },
   {
-    "id": "q_lockout",
+    "id": "q27",
+    "question": "Ticket P1 có SLA phản hồi ban đầu là bao nhiêu phút?",
+    "must_contain_any": ["15 phút"],
+    "must_not_contain": [],
+    "expect_top1_doc_id": "sla_p1_2026"
+  },
+  {
+    "id": "q28",
+    "question": "Thời gian phản hồi ban đầu quy định cho sự cố P1 là bao lâu?",
+    "must_contain_any": ["15 phút"],
+    "must_not_contain": [],
+    "expect_top1_doc_id": "sla_p1_2026"
+  },
+  {
+    "id": "q29",
+    "question": "Trong vòng bao nhiêu phút thì IT phải phản hồi ticket P1?",
+    "must_contain_any": ["15 phút"],
+    "must_not_contain": [],
+    "expect_top1_doc_id": "sla_p1_2026"
+  },
+  {
+    "id": "q30",
+    "question": "Sự cố cấp độ P1 yêu cầu phản hồi ban đầu trong mấy phút?",
+    "must_contain_any": ["15 phút"],
+    "must_not_contain": [],
+    "expect_top1_doc_id": "sla_p1_2026"
+  },
+  {
+    "id": "q31",
+    "question": "SLA giải quyết (resolution) ticket P1 là bao lâu?",
+    "must_contain_any": ["4 giờ", "4 tiếng"],
+    "must_not_contain": ["6 giờ"],
+    "expect_top1_doc_id": "sla_p1_2026"
+  },
+  {
+    "id": "q32",
+    "question": "Thời gian tối đa để resolution ticket P1 là bao lâu?",
+    "must_contain_any": ["4 giờ", "4 tiếng"],
+    "must_not_contain": ["6 giờ"],
+    "expect_top1_doc_id": "sla_p1_2026"
+  },
+  {
+    "id": "q33",
+    "question": "Sự cố P1 phải được giải quyết xong trong vòng mấy giờ?",
+    "must_contain_any": ["4 giờ", "4 tiếng"],
+    "must_not_contain": ["6 giờ"],
+    "expect_top1_doc_id": "sla_p1_2026"
+  },
+  {
+    "id": "q34",
+    "question": "Hạn định resolution cho sự cố nghiêm trọng P1 là bao lâu?",
+    "must_contain_any": ["4 giờ", "4 tiếng"],
+    "must_not_contain": ["6 giờ"],
+    "expect_top1_doc_id": "sla_p1_2026"
+  },
+  {
+    "id": "q35",
+    "question": "Quy định về thời gian khắc phục sự cố P1 là mấy tiếng?",
+    "must_contain_any": ["4 giờ", "4 tiếng"],
+    "must_not_contain": ["6 giờ"],
+    "expect_top1_doc_id": "sla_p1_2026"
+  },
+  {
+    "id": "q36",
     "question": "Bao nhiêu lần đăng nhập sai thì tài khoản bị khóa?",
     "must_contain_any": ["5 lần"],
     "must_not_contain": [],
-    "note": "Chunk từ it_helpdesk_faq"
+    "expect_top1_doc_id": "it_helpdesk_faq"
   },
   {
-    "id": "q_leave_version",
+    "id": "q37",
+    "question": "Tài khoản AD sẽ bị block sau bao nhiêu lần nhập sai password liên tiếp?",
+    "must_contain_any": ["5 lần"],
+    "must_not_contain": [],
+    "expect_top1_doc_id": "it_helpdesk_faq"
+  },
+  {
+    "id": "q38",
+    "question": "Số lần đăng nhập sai tối đa trước khi tài khoản bị khóa là bao nhiêu?",
+    "must_contain_any": ["5 lần"],
+    "must_not_contain": [],
+    "expect_top1_doc_id": "it_helpdesk_faq"
+  },
+  {
+    "id": "q39",
+    "question": "Tài khoản người dùng bị khóa sau 5 lần nhập sai liên tiếp đúng không?",
+    "must_contain_any": ["5 lần"],
+    "must_not_contain": [],
+    "expect_top1_doc_id": "it_helpdesk_faq"
+  },
+  {
+    "id": "q40",
+    "question": "Nhập sai mật khẩu liên tiếp bao nhiêu lần thì hệ thống khóa tài khoản?",
+    "must_contain_any": ["5 lần"],
+    "must_not_contain": [],
+    "expect_top1_doc_id": "it_helpdesk_faq"
+  },
+  {
+    "id": "q41",
+    "question": "Đổi mật khẩu self-service có thể mất tối đa bao nhiêu giờ để đồng bộ?",
+    "must_contain_any": ["24 giờ", "24 tiếng"],
+    "must_not_contain": [],
+    "expect_top1_doc_id": "it_helpdesk_faq"
+  },
+  {
+    "id": "q42",
+    "question": "Thời gian tối đa để đồng bộ mật khẩu sau khi đổi qua portal self-service là bao lâu?",
+    "must_contain_any": ["24 giờ", "24 tiếng"],
+    "must_not_contain": [],
+    "expect_top1_doc_id": "it_helpdesk_faq"
+  },
+  {
+    "id": "q43",
+    "question": "Việc đồng bộ toàn hệ thống sau khi reset pass qua portal có thể mất bao lâu?",
+    "must_contain_any": ["24 giờ", "24 tiếng"],
+    "must_not_contain": [],
+    "expect_top1_doc_id": "it_helpdesk_faq"
+  },
+  {
+    "id": "q44",
+    "question": "Mất tối đa bao nhiêu tiếng để đổi mật khẩu đồng bộ xong trên portal?",
+    "must_contain_any": ["24 giờ", "24 tiếng"],
+    "must_not_contain": [],
+    "expect_top1_doc_id": "it_helpdesk_faq"
+  },
+  {
+    "id": "q45",
+    "question": "Mật khẩu đổi qua portal self-service cần bao lâu để cập nhật toàn hệ thống?",
+    "must_contain_any": ["24 giờ", "24 tiếng"],
+    "must_not_contain": [],
+    "expect_top1_doc_id": "it_helpdesk_faq"
+  },
+  {
+    "id": "q46",
     "question": "Theo chính sách nghỉ phép hiện hành (2026), nhân viên dưới 3 năm kinh nghiệm được bao nhiêu ngày phép năm?",
     "must_contain_any": ["12 ngày", "12 ngày phép năm"],
     "must_not_contain": ["10 ngày phép năm"],
-    "expect_top1_doc_id": "hr_leave_policy",
-    "note": "Phải loại bản HR cũ (10 ngày); top-1 nên từ hr_leave_policy"
+    "expect_top1_doc_id": "hr_leave_policy"
+  },
+  {
+    "id": "q47",
+    "question": "Nhân viên dưới 3 năm kinh nghiệm có bao nhiêu ngày phép năm theo quy định 2026?",
+    "must_contain_any": ["12 ngày", "12 ngày phép năm"],
+    "must_not_contain": ["10 ngày phép năm"],
+    "expect_top1_doc_id": "hr_leave_policy"
+  },
+  {
+    "id": "q48",
+    "question": "Số ngày phép năm cho người làm dưới 3 năm theo chính sách 2026 là bao nhiêu?",
+    "must_contain_any": ["12 ngày", "12 ngày phép năm"],
+    "must_not_contain": ["10 ngày phép năm"],
+    "expect_top1_doc_id": "hr_leave_policy"
+  },
+  {
+    "id": "q49",
+    "question": "Chính sách nghỉ phép 2026 quy định bao nhiêu ngày phép cho nhân viên dưới 3 năm?",
+    "must_contain_any": ["12 ngày", "12 ngày phép năm"],
+    "must_not_contain": ["10 ngày phép năm"],
+    "expect_top1_doc_id": "hr_leave_policy"
+  },
+  {
+    "id": "q50",
+    "question": "Theo chính sách 2026, làm việc dưới 3 năm được hưởng 12 ngày phép năm đúng không?",
+    "must_contain_any": ["12 ngày", "12 ngày phép năm"],
+    "must_not_contain": ["10 ngày phép năm"],
+    "expect_top1_doc_id": "hr_leave_policy"
   }
 ]
